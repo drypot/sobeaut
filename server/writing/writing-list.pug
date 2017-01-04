@@ -1,0 +1,71 @@
+extends ../layout/layout
+
+block head-title
+  title #{appName}
+
+block site-title
+
+block content
+
+  script.
+    $(function() {
+      cwriting.initList();
+    });
+
+  .section.page-title
+    h1
+      a(href='/') #{appName}
+
+  if !gt
+    .section
+      .sub-section.top-links
+        if locals.user
+          a(href='/writings/new') Upload
+          //- a(href='/users/' + user._id) My Photos
+          //- user.home 에 '/' 문자 있는 경우도 있으므로 미리 URI 인코딩한다.
+          a(href='/' + encodeURIComponent(user.home)) My Photos
+          a(href='/users') Users
+          a(href='#' onclick='javascript:cuser.logout(); return false;') Logout
+        else
+          a(href='/users/login') Login
+          a(href='/users/register') Register
+
+      .sub-section.news
+        for banner in banners
+          a(href=banner.url, target="_blank") #{banner.text}
+          br
+
+  .section.writing-thumb-list
+    for writing in writings
+      .writing-thumb
+        .writing
+          a(href='/writings/' + writing._id)
+            img(src=writing.thumb, data-vers= writing.vers ? writing.vers.join(','): null)
+        - var c = writing.comment.split(/\r\n|\n/, 1)[0];
+        if c
+          .comment= c
+        .uname
+          //- user.home 에 '/' 문자 있는 경우도 있으므로 미리 URI 인코딩한다.
+          a(href='/' + encodeURIComponent(writing.user.home)) #{writing.user.name}
+
+  .section
+    if lt
+      .mini-section
+        a(href=lt) Next
+    if gt
+      .mini-section
+        a(href=gt) Previous
+    if lt
+      .mini-section
+        if dlt
+          a(href=dlt) !{dyear}
+        else
+          a(href='/?gt=0') First
+
+  .section.top-links
+    if appNamel != 'sobeaut'
+      a(href='https://sobeaut.com') Sobeaut
+    if appNamel != 'rapixel'
+      a(href='https://rapixel.com') Rapixel
+    if appNamel != 'osoky'
+      a(href='https://osoky.com') Osoky

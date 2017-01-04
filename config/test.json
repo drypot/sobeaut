@@ -1,0 +1,12 @@
+{
+  "appName": "Test",
+  "appNamel": "test",
+  "appDesc": "Test",
+
+  "appPort": 8091,
+  "cookieSecret": "o;iejf832ndvs",
+
+  "mongodb": "test",
+
+  "mailServer": ""
+ }

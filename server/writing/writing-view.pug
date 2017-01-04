@@ -1,0 +1,38 @@
+extends ../layout/layout
+
+block head-title
+  meta(property='og:writing', content=writing.thumb)
+  meta(property='og:title' content=writing.user.name)
+  meta(property='og:description' content=writing.comment)
+  title Image !{writing._id} - #{appName}
+
+block site-title
+
+block content
+
+  script.
+    $(function() {
+      cwriting.initView(!{JSON.stringify(writing)});
+    });
+
+  .section.writing-full
+    .writing
+      img(src=writing.thumb, data-vers= writing.vers ? writing.vers.join(','): null)
+
+  .section.writing-info
+    .sub-section(style='display: none')
+      a#fs(href='')
+        span.glyphicon.glyphicon-fullscreen
+
+    .sub-section
+      .comment #{writing.comment}
+      .cdate !{writing.cdateStr.slice(0,16)}
+      .uname
+        a(href='/' + encodeURIComponent(writing.user.home)) #{writing.user.name}
+
+    if updatable
+      .sub-section
+        .commands
+          button#update-btn.btn.btn-success.btn-xs Update
+          button#del-btn.btn.btn-danger.btn-xs Delete
+          button#del-confirm-btn.btn.btn-danger.btn-xs.hide Yes, Delete

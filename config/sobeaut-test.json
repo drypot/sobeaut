@@ -1,0 +1,18 @@
+{
+  "appName": "Sobeaut",
+  "appNamel": "sobeaut",
+  "appDesc": "Words only words.",
+
+  "mainSite": "http://sobeaut.localhost:8080",
+
+  "appPort": 8091,
+  "cookieSecret": "o;iejf832ndvs",
+
+  "mongodb": "sobeaut-test",
+
+  "mailServer": "",
+
+  "ticketGenInterval": 18,
+  "ticketMax": 3
+}
+

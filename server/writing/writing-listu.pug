@@ -1,0 +1,54 @@
+extends ../layout/layout
+
+block head-title
+  title #{tuser.name} - #{appName}
+
+block content
+  script.
+    $(function () {
+      cuser.initProfile();
+      cwriting.initList();
+    });
+
+  .section.page-title
+    h1
+      //- user.home 에 '/' 문자 있는 경우도 있으므로 미리 URI 인코딩한다.
+      a(href='/' + encodeURIComponent(tuser.home)) #{tuser.name}
+
+  if !gt
+    .section
+      #profile-text.sub-section
+        | #{tuser.profile}
+
+      if updatable
+        .sub-section.top-links
+          a(href='/users/' + tuser._id + '/update') Update Profile
+
+      if tuser.status == 'd'
+        .sub-section
+          | Deactivated Account
+
+  if writings.length
+
+    .section.writing-thumb-list
+      for writing in writings
+        .writing-thumb
+          .writing
+            a(href='/writings/' + writing._id)
+              img(src=writing.thumb, data-vers= writing.vers ? writing.vers.join(','): null)
+          if writing.comment
+            .comment= writing.comment
+    .section
+      if lt
+        .mini-section
+          a(href=lt) Next
+      if gt
+        .mini-section
+          a(href=gt) Previous
+      if lt
+        .mini-section
+          if dlt
+            a(href=dlt) !{dyear}
+          else
+            a(href=path + '?gt=0') First
+

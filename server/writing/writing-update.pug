@@ -1,0 +1,29 @@
+extends ../layout/layout
+
+block head-title
+  title Update Image - #{appName}
+
+block content
+
+  script.
+    $(function() {
+      cwriting.initUpdate(!{JSON.stringify(writing)});
+    });
+
+  .section.page-title
+    h1 Update Image
+
+  .section
+    form.main
+      .sub-section
+        .form-group
+          label.control-label Image
+          input.form-control(type='file', name='files', accept='writing/*', multiple='multiple')
+          if appNamel == 'drypot'
+            p.help-block
+              | Only SVG files.
+        .form-group
+          label.control-label Comment
+          textarea.form-control(name='text', rows=7) #{writing.comment}
+      .sub-section
+        button.btn.btn-primary(name='send', data-loading-text='Sending') Update

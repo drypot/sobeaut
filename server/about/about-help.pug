@@ -1,0 +1,23 @@
+extends ../layout/layout
+
+block head-title
+  title Help - #{appName}
+
+block content
+
+  .section.page-title
+    h1 Help
+
+  .section
+    .sub-section
+      | facebook:&nbsp;
+      a(href='https://www.facebook.com/sobeaut.news', target='_blank') https://www.facebook.com/sobeaut.news
+      br
+
+      | email:&nbsp;
+      -var email = 'support+' + appNamel + '@sobeaut.com'
+      a(href='mailto:' + email)= email 
+
+    .sub-section
+      span Want to deactivate your account?&nbsp;
+      a(href='/users/deactivate') click
