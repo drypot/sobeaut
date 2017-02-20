@@ -1,12 +1,15 @@
 {
   "appName": "Sobeaut",
   "appNamel": "sobeaut",
-  "appDesc": "Words only words.",
+  "appDesc": "Text only.",
 
   "mainSite": "http://sobeaut.localhost:8080",
 
   "appPort": 8091,
   "cookieSecret": "o;iejf832ndvs",
+
+  "uploadSite": "http://file.sobeaut.localhost:8080",
+  "uploadDir": "upload/sobeaut-test",
 
   "mongodb": "sobeaut-test",
 

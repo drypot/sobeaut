@@ -25,7 +25,7 @@ before(function (done) {
 });
 
 describe('put /api/writings/id', function () {
-  describe('updating with writing', function () {
+  describe('updating', function () {
     before(function (done) {
       writingb.writings.deleteMany(done);
     });
@@ -33,103 +33,27 @@ describe('put /api/writings/id', function () {
       userf.login('user1', done);
     });
     it('should succeed', function (done) {
-      expl.post('/api/writings').field('text', 'writing1').attach('files', 'samples/2560x1440.jpg').end(function (err, res) {
+      expl.post('/api/writings').field('text', 'writing1').end(function (err, res) {
         assert2.clear(err);
         assert2.clear(res.body.err);
-        var _id = res.body.ids[0];
+        assert2.ne(res.body.id, undefined);
+        var _id = res.body.id;
         writingb.writings.findOne({ _id: _id }, function (err, writing) {
           assert2.clear(err);
           assert2.ne(writing, undefined);
           assert2.ne(writing.cdate, undefined);
-          assert2.e(writing.comment, 'writing1');
-          writingb.identify(writingb.getPath(_id), function (err, meta) {
+          assert2.e(writing.text, 'writing1');
+          expl.put('/api/writings/' + _id).field('text', 'writing2').end(function (err, res) {
             assert2.clear(err);
-            assert2.e(meta.width, writingb.maxWidth);
-            assert(meta.height <writingb.maxWidth);
-            expl.put('/api/writings/' + _id).field('text', 'writing2').attach('files', 'samples/1440x2560.jpg').end(function (err, res) {
+            assert2.clear(res.body.err);
+            writingb.writings.findOne({ _id: _id }, function (err, writing) {
               assert2.clear(err);
-              assert2.clear(res.body.err);
-              writingb.writings.findOne({ _id: _id }, function (err, writing) {
-                assert2.clear(err);
-                assert2.ne(writing, undefined);
-                assert2.ne(writing.cdate, undefined);
-                assert2.e(writing.comment, 'writing2');
-                writingb.identify(writingb.getPath(_id), function (err, meta) {
-                  assert2.clear(err);
-                  assert(meta.width < writingb.maxWidth);
-                  assert2.e(meta.height, writingb.maxWidth);
-                  done();
-                });
-              });
+              assert2.ne(writing, undefined);
+              assert2.ne(writing.cdate, undefined);
+              assert2.e(writing.text, 'writing2');
+              done();
             });
           });
-        });
-      });
-    });
-  });
-  describe('updating with small writing', function () {
-    before(function (done) {
-      writingb.writings.deleteMany(done);
-    });
-    before(function (done) {
-      userf.login('user1', done);
-    });
-    it('should fail', function (done) {
-      expl.post('/api/writings').field('text', 'writing1').attach('files', 'samples/640x360.jpg').end(function (err, res) {
-        assert2.clear(err);
-        assert2.clear(res.body.err);
-        var _id = res.body.ids[0];
-        expl.put('/api/writings/' + _id).attach('files', 'samples/360x240.jpg').end(function (err, res) {
-          assert2.clear(err);
-          assert2.ne(res.body.err, undefined);
-          assert2.error(res.body.err, 'WRITING_SIZE');
-          done();
-        });
-      });
-    });
-  });
-  describe('updating with no file', function () {
-    before(function (done) {
-      writingb.writings.deleteMany(done);
-    });
-    before(function (done) {
-      userf.login('user1', done);
-    });
-    it('should succeed', function (done) {
-      expl.post('/api/writings').field('text', 'writing1').attach('files', 'samples/640x360.jpg').end(function (err, res) {
-        assert2.clear(err);
-        assert2.clear(res.body.err);
-        var _id = res.body.ids[0];
-        expl.put('/api/writings/' + _id).field('text', 'updated with no file').end(function (err, res) {
-          assert2.clear(err);
-          assert2.clear(res.body.err);
-          writingb.writings.findOne({ _id: _id }, function (err, writing) {
-            assert2.clear(err);
-            assert2.ne(writing, undefined);
-            assert2.e(writing.comment, 'updated with no file');
-            done();
-          });
-        });
-      });
-    });
-  });
-  describe('updating with text file', function () {
-    before(function (done) {
-      writingb.writings.deleteMany(done);
-    });
-    before(function (done) {
-      userf.login('user1', done);
-    });
-    it('should fail', function (done) {
-      expl.post('/api/writings').field('text', 'writing1').attach('files', 'samples/640x360.jpg').end(function (err, res) {
-        assert2.clear(err);
-        assert2.clear(res.body.err);
-        var _id = res.body.ids[0];
-        expl.put('/api/writings/' + _id).attach('files', 'server/express/express-upload-f1.txt').end(function (err, res) {
-          assert2.clear(err);
-          assert2.ne(res.body.err, undefined);
-          assert2.error(res.body.err, 'WRITING_TYPE');
-          done();
         });
       });
     });
@@ -141,10 +65,11 @@ describe('put /api/writings/id', function () {
     it('should fail', function (done) {
       userf.login('user1', function (err) {
         if (err) return done(err);
-        expl.post('/api/writings').field('text', 'writing1').attach('files', 'samples/640x360.jpg').end(function (err, res) {
+        expl.post('/api/writings').field('text', 'writing1').end(function (err, res) {
           assert2.clear(err);
           assert2.clear(res.body.err);
-          var _id = res.body.ids[0];
+          assert2.ne(res.body.id, undefined);
+          var _id = res.body.id;
           userf.login('user2', function (err) {
             if (err) return done(err);
             expl.put('/api/writings/' + _id).field('text', 'xxx').end(function (err, res) {

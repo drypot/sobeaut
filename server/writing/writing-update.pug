@@ -17,13 +17,6 @@ block content
     form.main
       .sub-section
         .form-group
-          label.control-label Image
-          input.form-control(type='file', name='files', accept='writing/*', multiple='multiple')
-          if appNamel == 'drypot'
-            p.help-block
-              | Only SVG files.
-        .form-group
-          label.control-label Comment
-          textarea.form-control(name='text', rows=7) #{writing.comment}
+          textarea.form-control(name='text', rows=21) #{writing.text}
       .sub-section
         button.btn.btn-primary(name='send', data-loading-text='Sending') Update

@@ -34,26 +34,13 @@ expb.core.put('/api/writings/:id([0-9]+)', expu.handler(function (req, res, done
     var form = writingn.getForm(req);
     writingb.checkUpdatable(user, id, function (err) {
       if (err) return done(err);
-      util2.fif(!form.files, function (next) {
-        next({}, null, null);
-      }, function (next) {
-        var upload = form.files[0];
-        writingb.checkImageMeta(upload.path, function (err, meta) {
-          if (err) return done(err);
-          // 파일, 디렉토리 삭제는 하지 않고 그냥 덮어쓴다.
-          // 삭제할 때 파일 없을 경우 에러나는 등 부작용 가능성.
-          writingb.saveImage(id, upload.path, meta, function (err, vers) {
-            if (err) return done(err);
-            next({}, meta, vers);
-          });
-        });
-      }, function (writing, meta, vers) {
-        writingb.fillImageDoc(writing, form, meta, vers);
-        writingb.writings.updateOne({ _id: id }, { $set: writing }, function (err) {
-          if (err) return done(err);
-          res.json({});
-          done();
-        });
+      var writing = {
+        text: form.text
+      };
+      writingb.writings.updateOne({ _id: id }, { $set: writing }, function (err) {
+        if (err) return done(err);
+        res.json({});
+        done();
       });
     });
   });

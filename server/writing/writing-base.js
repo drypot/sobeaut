@@ -16,6 +16,15 @@ error.define('WRITING_NO_MORE_TICKET', '새로운 글은 내일 쓰실 수 있�
 var writingId;
 
 init.add(function (done) {
+  if (config.dev) {
+    writingb.emptyDir = function (done) {
+      done(); // 첨부파일을 다루지 않으므로 테스트 첨부 디렉토리 정리가 필요없다. 
+    }
+  }
+  done();
+});
+
+init.add(function (done) {
   writingb.writings = mongo2.db.collection('writings');
   writingb.writings.createIndex({ uid: 1, _id: -1 }, function (err) {
     if (err) return done(err);
