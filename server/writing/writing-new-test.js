@@ -80,7 +80,7 @@ describe('getTicketCount', function () {
       });
     });
   });
-  describe('when max writings exists', function () {
+  describe('when max writings exist', function () {
     before(function (done) {
       writingb.writings.deleteMany(done);
     });
@@ -99,12 +99,12 @@ describe('getTicketCount', function () {
 });
 
 describe('post /api/writings', function () {
-  describe('when no writing exist', function () {
+  describe('when no writing exists', function () {
     before(function (done) {
       writingb.writings.deleteMany(done);
     });
     it('should succeed', function (done) {
-      expl.post('/api/writings').field('text', 'text1').end(function (err, res) {
+      expl.post('/api/writings').field('title', 'title1').field('text', 'text1').end(function (err, res) {
         assert2.clear(err);
         assert2.clear(res.body.err);
         assert2.ne(res.body.id, undefined);
@@ -112,13 +112,14 @@ describe('post /api/writings', function () {
           assert2.clear(err);
           assert2.e(writing.uid, userf.user1._id);
           assert2.ne(writing.cdate, undefined);
+          assert2.e(writing.title, 'title1');
           assert2.e(writing.text, 'text1');
           done();
         });
       });
     });
   });
-  describe('when max writing exists', function () {
+  describe('when max writings exist', function () {
     before(function (done) {
       writingb.writings.deleteMany(done);
     });
@@ -126,10 +127,47 @@ describe('post /api/writings', function () {
       gen(config.ticketGenInterval - 3, config.ticketMax, done);
     });
     it('should fail', function (done) {
-      expl.post('/api/writings').field('text', 'text2').end(function (err, res) {
+      expl.post('/api/writings').field('title', 'title1').field('text', 'text1').end(function (err, res) {
         assert2.clear(err);
-        assert2.e(res.body.err.code, error.WRITING_NO_MORE_TICKET.code)
+        assert2.error(res.body.err, error.NO_MORE_TICKET.code)
         assert2.e(res.body.id, undefined);
+        done();
+      });
+    });
+  });
+  describe('when no title', function () {
+    before(function (done) {
+      writingb.writings.deleteMany(done);
+    });
+    it('should fail', function (done) {
+      expl.post('/api/writings').field('title', '   ').field('text', 'text1').end(function (err, res) {
+        assert2.clear(err);
+        assert2.error(res.body.err, error.TITLE_EMPTY.code);
+        assert2.e(res.body.id, undefined);
+        done();
+      });
+    });
+  });
+  describe('when title length 128', function () {
+    before(function (done) {
+      writingb.writings.deleteMany(done);
+    });
+    it('should success', function (done) {
+      expl.post('/api/writings').field('title', 't'.repeat(128)).field('text', 'text1').end(function (err, res) {
+        assert2.clear(err);
+        assert2.clear(res.body.err);
+        done();
+      });
+    });
+  });
+  describe('when title length 129 (too long)', function () {
+    before(function (done) {
+      writingb.writings.deleteMany(done);
+    });
+    it('should fail', function (done) {
+      expl.post('/api/writings').field('title', 't'.repeat(129)).field('text', 'text1').end(function (err, res) {
+        assert2.clear(err);
+        assert2.error(res.body.err, error.TITLE_TOO_LONG.code);
         done();
       });
     });

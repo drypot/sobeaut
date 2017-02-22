@@ -45,16 +45,18 @@ error.define('INVALID_DATA', '비정상적인 값이 입력되었습니다.');
 error.define('INVALID_FORM', '*');
 
 error.find = function (act, code) {
-  if (act.code === error.INVALID_FORM.code) {
-    for (var i = 0; i < act.errors.length; i++) {
-      var e = act.errors[i];
-      if (e.code === code) {
+  if (act) {
+    if (act.code === error.INVALID_FORM.code) {
+      for (var i = 0; i < act.errors.length; i++) {
+        var e = act.errors[i];
+        if (e.code === code) {
+          return true;
+        }
+      }
+    } else {
+      if (act.code === code) {
         return true;
       }
-    }
-  } else {
-    if (act.code === code) {
-      return true;
     }
   }
   return false;

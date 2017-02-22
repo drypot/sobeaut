@@ -31,18 +31,22 @@ expb.core.post('/api/writings', expu.handler(function (req, res, done) {
     var form = getForm(req);
     getTicketCount(form.now, user, function (err, count, hours) {
       if (err) return done(err);
-      if (!count) return done(error('WRITING_NO_MORE_TICKET'));
-      var id = writingb.getNewId();
-      var writing = {
-        _id: id,
-        uid: user._id,
-        cdate: form.now,
-        text: form.text
-      };
-      writingb.writings.insertOne(writing, function (err) {
+      if (!count) return done(error('NO_MORE_TICKET'));
+      checkForm(form, function (err) {
         if (err) return done(err);
-        res.json({ id: id });
-        done();
+        var id = writingb.getNewId();
+        var writing = {
+          _id: id,
+          uid: user._id,
+          cdate: form.now,
+          title: form.title,
+          text: form.text
+        };
+        writingb.writings.insertOne(writing, function (err) {
+          if (err) return done(err);
+          res.json({ id: id });
+          done();
+        });
       });
     });
   });
@@ -52,9 +56,28 @@ var getForm = writingn.getForm = function (req) {
   var body = req.body;
   var form = {};
   form.now = new Date();
+  form.title = String(body.title || '').trim(); 
   form.text = String(body.text || '').trim();
   return form;
 }
+
+var checkForm = writingn.checkForm = function (form, done) {
+  var errors = [];
+  if (!form.title.length) {
+    errors.push(error.TITLE_EMPTY);
+  }
+  if (form.title.length > 128) {
+    errors.push(error.TITLE_TOO_LONG);
+  }
+  if (form.text.length > 1024 * 1024) {
+    errors.push(error.TEXT_TOO_LONG);
+  }
+  if (errors.length) {
+    done(error(errors));
+  } else {
+    done();
+  }
+};
 
 var getTicketCount = writingn.getTicketCount = function(now, user, done) {
   var count = config.ticketMax;

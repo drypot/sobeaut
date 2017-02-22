@@ -8,8 +8,11 @@ var config = require('../base/config');
 var mongo2 = require('../mongo/mongo2');
 var writingb = exports;
 
+error.define('TITLE_EMPTY', '제목이 없습니다.', 'title');
+error.define('TITLE_TOO_LONG', '제목이 너무 깁니다.', 'title');
+error.define('TEXT_TOO_LONG', '내용이 너무 깁니다.', 'text');
 error.define('WRITING_NOT_EXIST', '글이 없습니다.');
-error.define('WRITING_NO_MORE_TICKET', '새로운 글은 내일 쓰실 수 있습니다.');
+error.define('NO_MORE_TICKET', '새로운 글은 내일 쓰실 수 있습니다.');
 
 // writings
 
