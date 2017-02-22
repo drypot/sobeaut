@@ -25,16 +25,16 @@ describe('get /api/writings', function (done) {
   before(function (done) {
     var now = new Date();
     var writings = [
-      { _id: 1,  uid: userf.user1._id, cdate: now, comment: '1' },
-      { _id: 2,  uid: userf.user1._id, cdate: now, comment: '2' },
-      { _id: 3,  uid: userf.user1._id, cdate: now, comment: '3' },
-      { _id: 4,  uid: userf.user1._id, cdate: now, comment: '4' },
-      { _id: 5,  uid: userf.user1._id, cdate: now, comment: '5' },
-      { _id: 6,  uid: userf.user1._id, cdate: now, comment: '6' },
-      { _id: 7,  uid: userf.user1._id, cdate: now, comment: '7' },
-      { _id: 8,  uid: userf.user1._id, cdate: now, comment: '8' },
-      { _id: 9,  uid: userf.user1._id, cdate: now, comment: '9' },
-      { _id: 10, uid: userf.user1._id, cdate: now, comment: '10' },
+      { _id: 1,  uid: userf.user1._id, cdate: now, title: '1', text: '1' },
+      { _id: 2,  uid: userf.user1._id, cdate: now, title: '2', text: '2' },
+      { _id: 3,  uid: userf.user1._id, cdate: now, title: '3', text: '3' },
+      { _id: 4,  uid: userf.user1._id, cdate: now, title: '4', text: '4' },
+      { _id: 5,  uid: userf.user1._id, cdate: now, title: '5', text: '5' },
+      { _id: 6,  uid: userf.user1._id, cdate: now, title: '6', text: '6' },
+      { _id: 7,  uid: userf.user1._id, cdate: now, title: '7', text: '7' },
+      { _id: 8,  uid: userf.user1._id, cdate: now, title: '8', text: '8' },
+      { _id: 9,  uid: userf.user1._id, cdate: now, title: '9', text: '9' },
+      { _id: 10, uid: userf.user1._id, cdate: now, title: '10', text: '10' },
     ];
     writingb.writings.insertMany(writings, done);    
   });
@@ -138,16 +138,16 @@ describe('get /api/writings deep', function (done) {
   });
   before(function (done) {
     var writings = [
-      { _id: 11, uid: userf.user1._id, cdate: new Date(2003, 3, 3), comment: '' },
-      { _id: 13, uid: userf.user2._id, cdate: new Date(2003, 6, 7), comment: '' },
-      { _id: 15, uid: userf.user2._id, cdate: new Date(2005, 9, 1), comment: '' },
-      { _id: 18, uid: userf.user2._id, cdate: new Date(2007, 9, 1), comment: '' },
-      { _id: 27, uid: userf.user1._id, cdate: new Date(2009, 5, 4), comment: '' },
-      { _id: 36, uid: userf.user2._id, cdate: new Date(2009, 8, 2), comment: '' },
-      { _id: 49, uid: userf.user1._id, cdate: new Date(2010, 1, 9), comment: '' },
-      { _id: 67, uid: userf.user2._id, cdate: new Date(2012, 7, 6), comment: '' },
-      { _id: 82, uid: userf.user2._id, cdate: new Date(2013, 2, 3), comment: '' },
-      { _id: 98, uid: userf.user1._id, cdate: new Date(2014, 4, 9), comment: '' },
+      { _id: 11, uid: userf.user1._id, cdate: new Date(2003, 3, 3), title: '' , text: '' },
+      { _id: 13, uid: userf.user2._id, cdate: new Date(2003, 6, 7), title: '' , text: '' },
+      { _id: 15, uid: userf.user2._id, cdate: new Date(2005, 9, 1), title: '' , text: '' },
+      { _id: 18, uid: userf.user2._id, cdate: new Date(2007, 9, 1), title: '' , text: '' },
+      { _id: 27, uid: userf.user1._id, cdate: new Date(2009, 5, 4), title: '' , text: '' },
+      { _id: 36, uid: userf.user2._id, cdate: new Date(2009, 8, 2), title: '' , text: '' },
+      { _id: 49, uid: userf.user1._id, cdate: new Date(2010, 1, 9), title: '' , text: '' },
+      { _id: 67, uid: userf.user2._id, cdate: new Date(2012, 7, 6), title: '' , text: '' },
+      { _id: 82, uid: userf.user2._id, cdate: new Date(2013, 2, 3), title: '' , text: '' },
+      { _id: 98, uid: userf.user1._id, cdate: new Date(2014, 4, 9), title: '' , text: '' },
     ];
     writingb.writings.insertMany(writings, done);    
   });

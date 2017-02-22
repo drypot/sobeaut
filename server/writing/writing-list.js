@@ -26,7 +26,7 @@ function list(req, res, api, done) {
   mongo2.findPage(writingb.writings, {}, {}, gt, lt, ps, filter, function (err, writings, gt, lt) {
     if (err) return done(err);
     util2.fif(writings.length, function (next) {
-      let cdate = writings[writings.length - 1].cdate;
+      var cdate = writings[writings.length - 1].cdate;
       var now = new Date();
       var ddate = new Date(cdate.getFullYear() - 1, now.getMonth(), now.getDate() + 1);
       mongo2.findDeepDoc(writingb.writings, {}, {}, ddate, next);
