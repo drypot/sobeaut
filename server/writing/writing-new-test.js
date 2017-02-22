@@ -129,7 +129,7 @@ describe('post /api/writings', function () {
     it('should fail', function (done) {
       expl.post('/api/writings').field('title', 'title1').field('text', 'text1').end(function (err, res) {
         assert2.clear(err);
-        assert2.error(res.body.err, error.NO_MORE_TICKET.code)
+        assert2.error(res.body.err, 'NO_MORE_TICKET')
         assert2.e(res.body.id, undefined);
         done();
       });
@@ -142,7 +142,7 @@ describe('post /api/writings', function () {
     it('should fail', function (done) {
       expl.post('/api/writings').field('title', '   ').field('text', 'text1').end(function (err, res) {
         assert2.clear(err);
-        assert2.error(res.body.err, error.TITLE_EMPTY.code);
+        assert2.error(res.body.err, 'TITLE_EMPTY');
         assert2.e(res.body.id, undefined);
         done();
       });
@@ -167,7 +167,31 @@ describe('post /api/writings', function () {
     it('should fail', function (done) {
       expl.post('/api/writings').field('title', 't'.repeat(129)).field('text', 'text1').end(function (err, res) {
         assert2.clear(err);
-        assert2.error(res.body.err, error.TITLE_TOO_LONG.code);
+        assert2.error(res.body.err, 'TITLE_TOO_LONG');
+        done();
+      });
+    });
+  });
+  describe('when text length 1M', function () {
+    before(function (done) {
+      writingb.writings.deleteMany(done);
+    });
+    it('should success', function (done) {
+      expl.post('/api/writings').field('title', 'title1').field('text', 't'.repeat(1024*1024)).end(function (err, res) {
+        assert2.clear(err);
+        assert2.clear(res.body.err);
+        done();
+      });
+    });
+  });
+  describe('when text length 1M + 1 (too long)', function () {
+    before(function (done) {
+      writingb.writings.deleteMany(done);
+    });
+    it('should fail', function (done) {
+      expl.post('/api/writings').field('title', 'title1').field('text', 't'.repeat(1024*1024+1)).end(function (err, res) {
+        assert2.clear(err);
+        assert2.error(res.body.err, 'TEXT_TOO_LONG');
         done();
       });
     });

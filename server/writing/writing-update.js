@@ -34,13 +34,17 @@ expb.core.put('/api/writings/:id([0-9]+)', expu.handler(function (req, res, done
     var form = writingn.getForm(req);
     writingb.checkUpdatable(user, id, function (err) {
       if (err) return done(err);
-      var writing = {
-        text: form.text
-      };
-      writingb.writings.updateOne({ _id: id }, { $set: writing }, function (err) {
+      writingn.checkForm(form, function (err) {
         if (err) return done(err);
-        res.json({});
-        done();
+        var writing = {
+          title: form.title,
+          text: form.text
+        };
+        writingb.writings.updateOne({ _id: id }, { $set: writing }, function (err) {
+          if (err) return done(err);
+          res.json({});
+          done();
+        });
       });
     });
   });

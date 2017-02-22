@@ -4,7 +4,7 @@ var assert = require('assert');
 var assert2 = require('../base/assert2');
 
 var error = exports = module.exports = function (obj) {
-  var err;
+  var err = undefined;
   if (Array.isArray(obj)) {
     err = new Error(error.INVALID_FORM.message);
     err.code = error.INVALID_FORM.code;
@@ -44,17 +44,17 @@ error.define = function (code, msg, field) {
 error.define('INVALID_DATA', '비정상적인 값이 입력되었습니다.');
 error.define('INVALID_FORM', '*');
 
-error.find = function (act, code) {
-  if (act) {
-    if (act.code === error.INVALID_FORM.code) {
-      for (var i = 0; i < act.errors.length; i++) {
-        var e = act.errors[i];
-        if (e.code === code) {
+error.find = function (v, c) {
+  if (v) {
+    if (v.code === error.INVALID_FORM.code) {
+      for (var i = 0; i < v.errors.length; i++) {
+        var e = v.errors[i];
+        if (e.code === c) {
           return true;
         }
       }
     } else {
-      if (act.code === code) {
+      if (v.code === c) {
         return true;
       }
     }
@@ -62,12 +62,12 @@ error.find = function (act, code) {
   return false;
 };
 
-assert2.error = function (err, code, should = true) {
-  var exist = error.find(err, code);
+assert2.error = function (v, c, should = true) {
+  var exist = error.find(v, c);
   if (should && !exist) {
-    assert.fail(err, code, code + ' should exist.');
+    assert.fail(undefined, undefined, c + ' should exist.');
   }
   if (!should && exist) {
-    assert.fail(err, code, code + ' should not exist.');
+    assert.fail(undefined, undefined, c + ' should not exist.');
   }
 }
