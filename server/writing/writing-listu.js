@@ -31,13 +31,14 @@ function profile(req, res, tuser) {
   var gt = parseInt(req.query.gt);
   var ps = parseInt(req.query.ps) || 16;
   var query = { uid: tuser.id };
-  mongo2.findPage(writingb.writings, { uid: tuser._id }, {}, gt, lt, ps, filter, function (err, writings, gt, lt) {
+  var opt = { text: 0 }
+  mongo2.findPage(writingb.writings, { uid: tuser._id }, opt, gt, lt, ps, filter, function (err, writings, gt, lt) {
     if (err) return done(err);
     util2.fif(writings.length, function (next) {
       let cdate = writings[writings.length - 1].cdate;
       var now = new Date();
       var ddate = new Date(cdate.getFullYear() - 1, now.getMonth(), now.getDate() + 1);
-      mongo2.findDeepDoc(writingb.writings, { uid: tuser._id }, {}, ddate, next);
+      mongo2.findDeepDoc(writingb.writings, { uid: tuser._id }, opt, ddate, next);
     }, function (next) {
       next(null, undefined, undefined);
     }, function (err, dyear, dlt) {
@@ -63,7 +64,6 @@ function filter(writing, done) {
       name: user.name,
       home: user.home
     };
-    writing.thumb = writingb.getThumbUrl(writing._id);
     writing.cdateStr = util2.dateTimeString(writing.cdate);
     done(null, writing);
   });
