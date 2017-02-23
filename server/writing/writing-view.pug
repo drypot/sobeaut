@@ -15,17 +15,12 @@ block content
       cwriting.initView(!{JSON.stringify(writing)});
     });
 
-  .section.writing-full
-    .writing
-      img(src=writing.thumb, data-vers= writing.vers ? writing.vers.join(','): null)
-
-  .section.writing-info
-    .sub-section(style='display: none')
-      a#fs(href='')
-        span.glyphicon.glyphicon-fullscreen
-
+  .section.writing-view
     .sub-section
-      .comment #{writing.comment}
+      .title #{writing.title}
+    .sub-section
+      .text #{writing.text}
+    .sub-section
       .cdate !{writing.cdateStr.slice(0,16)}
       .uname
         a(href='/' + encodeURIComponent(writing.user.home)) #{writing.user.name}

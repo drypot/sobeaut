@@ -29,8 +29,6 @@ function view(req, res, api, done) {
         name: user.name,
         home: user.home
       };
-      writing.dir = writingb.getDirUrl(writing._id);
-      writing.thumb = writingb.getThumbUrl(writing._id);
       writing.cdateStr = util2.dateTimeString(writing.cdate);
       writing.cdate = writing.cdate.getTime();
       if (api) {

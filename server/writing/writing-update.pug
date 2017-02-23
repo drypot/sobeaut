@@ -17,6 +17,10 @@ block content
     form.main
       .sub-section
         .form-group
+          label.control-label Title
+          input.form-control(name='title', type='text', maxlength=128, value=writing.title)  
+        .form-group
+          label.control-label Content
           textarea.form-control(name='text', rows=21) #{writing.text}
       .sub-section
         button.btn.btn-primary(name='send', data-loading-text='Sending') Update

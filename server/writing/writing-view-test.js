@@ -24,12 +24,11 @@ before(function (done) {
 describe('get /api/writings/:id([0-9]+)', function () {
   describe('getting writing', function () {
     it('should succeed', function (done) {
-      expl.post('/api/writings').field('text', 'writing1').attach('files', 'samples/640x360.jpg').end(function (err, res) {
+      expl.post('/api/writings').field('title', 'title1').field('text', 'text1').end(function (err, res) {
         assert2.clear(err);
         assert2.clear(res.body.err);
-        assert2.ne(res.body.ids, undefined);
-        assert2.e(res.body.ids.length, 1);
-        var _id = res.body.ids[0];
+        assert2.ne(res.body.id, undefined);
+        var _id = res.body.id;
         expl.get('/api/writings/' + _id).end(function (err, res) {
           assert2.clear(err);
           assert2.clear(res.body.err);

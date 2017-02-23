@@ -1,18 +1,18 @@
 extends ../layout/layout
 
 block head-title
-  title Upload - #{appName}
+  title New Writing - #{appName}
 
 block content
 
   .section.page-title
-    h1 Upload
+    h1 New Writing
 
   if !ticketCount
     .section
       | !{ticketMax} writings a day.
       br
-      | You can upload #{hours} hours later.
+      | You can write #{hours} hours later.
 
   else
     script.
@@ -24,6 +24,10 @@ block content
       form.main
         .sub-section
           .form-group
+            label.control-label Title
+            input.form-control(name='title', type='text', maxlength=128)  
+          .form-group
+            label.control-label Content
             textarea.form-control(name='text', rows=21)
         .sub-section
           button.btn.btn-primary(name='send', data-loading-text='Sending') Send

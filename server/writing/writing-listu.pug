@@ -33,11 +33,8 @@ block content
     .section.writing-thumb-list
       for writing in writings
         .writing-thumb
-          .writing
-            a(href='/writings/' + writing._id)
-              img(src=writing.thumb, data-vers= writing.vers ? writing.vers.join(','): null)
-          if writing.comment
-            .comment= writing.comment
+          .title
+            a(href='/writings/' + writing._id) #{writing.title}
     .section
       if lt
         .mini-section
