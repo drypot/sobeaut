@@ -64,7 +64,7 @@ $(function () {
   };
 
   cwriting.initView = function (writing) {
-    var $text = $('.writing-view .text');
+    var $text = $('.writing-text .text');
     $text.html(tagUpText($text.html()));
 
     $('#update-btn').click(function () {
