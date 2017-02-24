@@ -20,5 +20,8 @@ block content
           input.form-control.input-lg(name='title', type='text', maxlength=128, placeholder='Title', value=writing.title)  
         .form-group
           textarea.form-control.input-lg(name='text', rows=21, placeholder='Content') #{writing.text}
+        .form-group
+          label.control-label Align Center
+          input(name='center', type='checkbox', checked=writing.align == 'center')
       .sub-section
         button.btn.btn-primary(name='send', data-loading-text='Sending') Update

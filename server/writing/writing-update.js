@@ -37,6 +37,7 @@ expb.core.put('/api/writings/:id([0-9]+)', expu.handler(function (req, res, done
       writingn.checkForm(form, function (err) {
         if (err) return done(err);
         var writing = {
+          align: form.align,
           title: form.title,
           text: form.text
         };

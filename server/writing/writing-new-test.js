@@ -183,4 +183,42 @@ describe('post /api/writings', function () {
       });
     });
   });
+  describe('when center not checked', function () {
+    before(function (done) {
+      writingb.writings.deleteMany(done);
+    });
+    it('align should be left', function (done) {
+      expl.post('/api/writings').end(function (err, res) {
+        assert2.clear(err);
+        assert2.clear(res.body.err);
+        assert2.ne(res.body.id, undefined);
+        writingb.writings.findOne({ _id: res.body.id }, function (err, writing) {
+          assert2.clear(err);
+          assert2.e(writing.uid, userf.user1._id);
+          assert2.ne(writing.cdate, undefined);
+          assert2.e(writing.align, 'left');
+          done();
+        });
+      });
+    });
+  });
+  describe('when center checked', function () {
+    before(function (done) {
+      writingb.writings.deleteMany(done);
+    });
+    it('align should be center', function (done) {
+      expl.post('/api/writings').field('center', 'on').end(function (err, res) {
+        assert2.clear(err);
+        assert2.clear(res.body.err);
+        assert2.ne(res.body.id, undefined);
+        writingb.writings.findOne({ _id: res.body.id }, function (err, writing) {
+          assert2.clear(err);
+          assert2.e(writing.uid, userf.user1._id);
+          assert2.ne(writing.cdate, undefined);
+          assert2.e(writing.align, 'center');
+          done();
+        });
+      });
+    });
+  });
 });

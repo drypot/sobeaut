@@ -33,7 +33,7 @@ describe('put /api/writings/id', function () {
       userf.login('user1', done);
     });
     it('should succeed', function (done) {
-      expl.post('/api/writings').field('title', 'title1').field('text', 'text1').end(function (err, res) {
+      expl.post('/api/writings').field('title', 'title1').field('text', 'text1').field('center', 'on').end(function (err, res) {
         assert2.clear(err);
         assert2.clear(res.body.err);
         assert2.ne(res.body.id, undefined);
@@ -44,6 +44,7 @@ describe('put /api/writings/id', function () {
           assert2.ne(writing.cdate, undefined);
           assert2.e(writing.title, 'title1');
           assert2.e(writing.text, 'text1');
+          assert2.e(writing.align, 'center');
           expl.put('/api/writings/' + _id).field('title', 'title2').field('text', 'text2').end(function (err, res) {
             assert2.clear(err);
             assert2.clear(res.body.err);
@@ -53,6 +54,7 @@ describe('put /api/writings/id', function () {
               assert2.ne(writing.cdate, undefined);
               assert2.e(writing.title, 'title2');
               assert2.e(writing.text, 'text2');
+              assert2.e(writing.align, 'left');
               done();
             });
           });

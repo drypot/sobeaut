@@ -138,7 +138,6 @@ pre.sample {
   .writing-view .text {
     margin-bottom: 1.8em;
     white-space: pre-line;
-    text-align: left;
     line-height: 180%; }
   .writing-view .cdate {
     margin-bottom: 1em;
@@ -146,6 +145,10 @@ pre.sample {
   .writing-view .uname {
     margin-bottom: 2em;
     font-size: 1.4em; }
+  .writing-view .left {
+    text-align: left; }
+  .writing-view .center {
+    text-align: center; }
 
 #profile-text {
   white-space: pre-line; }

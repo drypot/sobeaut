@@ -241,7 +241,6 @@ pre.sample {
   .text {
     margin-bottom: 1.8em;
     white-space: pre-line;
-    text-align: left;
     line-height: 180%;
   }
   .cdate {
@@ -253,6 +252,12 @@ pre.sample {
     font-size: 1.4em;
   }
   .commands {
+  }
+  .left {
+    text-align: left;
+  }
+  .center {
+    text-align: center;
   }
 }
 

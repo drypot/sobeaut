@@ -39,6 +39,7 @@ expb.core.post('/api/writings', expu.handler(function (req, res, done) {
           _id: id,
           uid: user._id,
           cdate: form.now,
+          align: form.align,
           title: form.title,
           text: form.text
         };
@@ -58,6 +59,7 @@ var getForm = writingn.getForm = function (req) {
   form.now = new Date();
   form.title = String(body.title || '').trim(); 
   form.text = String(body.text || '').trim();
+  form.align = !!body.center ? 'center' : 'left';
   return form;
 }
 
