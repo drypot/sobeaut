@@ -63,9 +63,6 @@ var getForm = writingn.getForm = function (req) {
 
 var checkForm = writingn.checkForm = function (form, done) {
   var errors = [];
-  if (!form.title.length) {
-    errors.push(error.TITLE_EMPTY);
-  }
   if (form.title.length > 128) {
     errors.push(error.TITLE_TOO_LONG);
   }

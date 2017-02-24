@@ -67,7 +67,7 @@ describe('put /api/writings/id', function () {
     it('should fail', function (done) {
       userf.login('user1', function (err) {
         if (err) return done(err);
-        expl.post('/api/writings').field('title', 'title2').field('text', 'text1').end(function (err, res) {
+        expl.post('/api/writings').end(function (err, res) {
           assert2.clear(err);
           assert2.clear(res.body.err);
           assert2.ne(res.body.id, undefined);

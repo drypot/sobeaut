@@ -127,22 +127,9 @@ describe('post /api/writings', function () {
       gen(config.ticketGenInterval - 3, config.ticketMax, done);
     });
     it('should fail', function (done) {
-      expl.post('/api/writings').field('title', 'title1').field('text', 'text1').end(function (err, res) {
+      expl.post('/api/writings').end(function (err, res) {
         assert2.clear(err);
         assert2.error(res.body.err, 'NO_MORE_TICKET')
-        assert2.e(res.body.id, undefined);
-        done();
-      });
-    });
-  });
-  describe('when no title', function () {
-    before(function (done) {
-      writingb.writings.deleteMany(done);
-    });
-    it('should fail', function (done) {
-      expl.post('/api/writings').field('title', '   ').field('text', 'text1').end(function (err, res) {
-        assert2.clear(err);
-        assert2.error(res.body.err, 'TITLE_EMPTY');
         assert2.e(res.body.id, undefined);
         done();
       });
@@ -153,7 +140,7 @@ describe('post /api/writings', function () {
       writingb.writings.deleteMany(done);
     });
     it('should success', function (done) {
-      expl.post('/api/writings').field('title', 't'.repeat(128)).field('text', 'text1').end(function (err, res) {
+      expl.post('/api/writings').field('title', 't'.repeat(128)).end(function (err, res) {
         assert2.clear(err);
         assert2.clear(res.body.err);
         done();
@@ -165,7 +152,7 @@ describe('post /api/writings', function () {
       writingb.writings.deleteMany(done);
     });
     it('should fail', function (done) {
-      expl.post('/api/writings').field('title', 't'.repeat(129)).field('text', 'text1').end(function (err, res) {
+      expl.post('/api/writings').field('title', 't'.repeat(129)).end(function (err, res) {
         assert2.clear(err);
         assert2.error(res.body.err, 'TITLE_TOO_LONG');
         done();
@@ -177,7 +164,7 @@ describe('post /api/writings', function () {
       writingb.writings.deleteMany(done);
     });
     it('should success', function (done) {
-      expl.post('/api/writings').field('title', 'title1').field('text', 't'.repeat(1024*1024)).end(function (err, res) {
+      expl.post('/api/writings').field('text', 't'.repeat(1024*1024)).end(function (err, res) {
         assert2.clear(err);
         assert2.clear(res.body.err);
         done();
@@ -189,7 +176,7 @@ describe('post /api/writings', function () {
       writingb.writings.deleteMany(done);
     });
     it('should fail', function (done) {
-      expl.post('/api/writings').field('title', 'title1').field('text', 't'.repeat(1024*1024+1)).end(function (err, res) {
+      expl.post('/api/writings').field('text', 't'.repeat(1024*1024+1)).end(function (err, res) {
         assert2.clear(err);
         assert2.error(res.body.err, 'TEXT_TOO_LONG');
         done();

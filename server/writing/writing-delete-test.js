@@ -30,12 +30,12 @@ describe('del /api/writings/[id]', function () {
       userf.login('user1', done);
     });
     it('should succeed', function (done) {
-      expl.post('/api/writings').field('text', 'text1').end(function (err, res) {
+      expl.post('/api/writings').end(function (err, res) {
         assert2.clear(err);
         assert2.clear(res.body.err);
         assert2.ne(res.body.id, undefined);
         var _id1 = res.body.id;
-        expl.post('/api/writings').field('text', 'text2').end(function (err, res) {
+        expl.post('/api/writings').end(function (err, res) {
           assert2.clear(err);
           assert2.clear(res.body.err);
           assert2.ne(res.body.id, undefined);
@@ -64,7 +64,7 @@ describe('del /api/writings/[id]', function () {
     it('should succeed', function (done) {
       userf.login('user1', function (err) {
         assert2.clear(err);
-        expl.post('/api/writings').field('text', 'text1').end(function (err, res) {
+        expl.post('/api/writings').end(function (err, res) {
           assert2.clear(err);
           assert2.clear(res.body.err);
           assert2.ne(res.body.id, undefined);
@@ -92,7 +92,7 @@ describe('del /api/writings/[id]', function () {
     it('should fail', function (done) {
       userf.login('user1', function (err) {
         assert2.clear(err);
-        expl.post('/api/writings').field('text', 'text1').end(function (err, res) {
+        expl.post('/api/writings').end(function (err, res) {
           assert2.clear(err);
           assert2.clear(res.body.err);
           assert2.ne(res.body.id, undefined);
