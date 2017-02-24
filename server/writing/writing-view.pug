@@ -18,9 +18,10 @@ block content
     .section.page-title
       h1 #{writing.title}
 
-  .section.writing-view
-    .sub-section
-      .text(class=writing.align) #{writing.text}
+  .section.writing-text
+    .text(class=writing.align) #{writing.text}
+
+  .section.writing-info
     .sub-section
       .cdate !{writing.cdateStr.slice(0,16)}
       .uname

@@ -131,24 +131,27 @@ pre.sample {
     .writing-thumb-list .writing-thumb a {
       color: #333333; }
 
-.writing-view {
+.writing-text {
   padding: 0em 2rem; }
-  .writing-view a {
+  .writing-text a {
     color: #333333; }
-  .writing-view .text {
+  .writing-text .text {
     margin-bottom: 1.8em;
     white-space: pre-line;
     line-height: 180%; }
-  .writing-view .cdate {
-    margin-bottom: 1em;
-    font-size: 0.8em; }
-  .writing-view .uname {
-    margin-bottom: 2em;
-    font-size: 1.4em; }
-  .writing-view .left {
+  .writing-text .left {
     text-align: left; }
-  .writing-view .center {
+  .writing-text .center {
     text-align: center; }
+
+.writing-info a {
+  color: #333333; }
+.writing-info .cdate {
+  margin-bottom: 1em;
+  font-size: 0.8em; }
+.writing-info .uname {
+  margin-bottom: 2em;
+  font-size: 1.4em; }
 
 #profile-text {
   white-space: pre-line; }
