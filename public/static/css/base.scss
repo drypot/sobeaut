@@ -125,12 +125,6 @@ form.main {
   max-width: $form-width;
   margin: 0 auto;
   padding: 0em 1em;
-  .control-label {
-    font-size: 1em; // override bootstrap
-  }
-  .form-control {
-    font-size: 1em; // override bootstrap
-  }
   input[type=file] {
     width: 100%;
   }
@@ -140,7 +134,10 @@ form.main {
 
 form.text {
   max-width: $width;
+  input {
+  }
   textarea {
+    //font-size: 1em;
     line-height: 180%;
   }
 }
