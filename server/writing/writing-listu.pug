@@ -34,7 +34,7 @@ block content
       for writing in writings
         .writing-thumb
           .title
-            a(href='/writings/' + writing._id) #{writing.title}
+            a(href='/writings/' + writing._id) #{writing.title || "..."}
     .section
       if lt
         .mini-section

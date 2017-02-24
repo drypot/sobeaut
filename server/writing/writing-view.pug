@@ -1,12 +1,11 @@
 extends ../layout/layout
 
-block head-title
-  meta(property='og:writing', content=writing.thumb)
-  meta(property='og:title' content=writing.user.name)
-  meta(property='og:description' content=writing.comment)
-  title Image !{writing._id} - #{appName}
 
-block site-title
+block head-title
+  - var safeTitle = writing.title ? writing.title : "Writing " + writing._id;
+  title #{safeTitle} - #{appName}
+  meta(property='og:title' content=safeTitle)
+  meta(property='og:description' content=writing.text.slice(0, 140))
 
 block content
 
@@ -15,9 +14,11 @@ block content
       cwriting.initView(!{JSON.stringify(writing)});
     });
 
+  if writing.title
+    .section.page-title
+      h1 #{writing.title}
+
   .section.writing-view
-    .sub-section
-      .title #{writing.title}
     .sub-section
       .text #{writing.text}
     .sub-section

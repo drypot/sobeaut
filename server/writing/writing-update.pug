@@ -1,7 +1,7 @@
 extends ../layout/layout
 
 block head-title
-  title Update Image - #{appName}
+  title Update - #{appName}
 
 block content
 
@@ -11,16 +11,14 @@ block content
     });
 
   .section.page-title
-    h1 Update Image
+    h1 Update
 
   .section
-    form.main
+    form.main.text
       .sub-section
         .form-group
-          label.control-label Title
-          input.form-control(name='title', type='text', maxlength=128, value=writing.title)  
+          input.form-control(name='title', type='text', maxlength=128, placeholder='Title', value=writing.title)  
         .form-group
-          label.control-label Content
-          textarea.form-control(name='text', rows=21) #{writing.text}
+          textarea.form-control(name='text', rows=21, placeholder='Content') #{writing.text}
       .sub-section
         button.btn.btn-primary(name='send', data-loading-text='Sending') Update

@@ -66,8 +66,17 @@ form.main {
   max-width: 480px;
   margin: 0 auto;
   padding: 0em 1em; }
+  form.main .control-label {
+    font-size: 1em; }
+  form.main .form-control {
+    font-size: 1em; }
   form.main input[type=file] {
     width: 100%; }
+
+form.text {
+  max-width: 640px; }
+  form.text textarea {
+    line-height: 180%; }
 
 pre.sample {
   max-width: 480px;
@@ -121,32 +130,26 @@ pre.sample {
 .writing-thumb-list {
   max-width: 100%; }
   .writing-thumb-list .writing-thumb {
-    margin: 4.5em auto;
-    text-align: center;
-    max-width: 100%; }
-    @media (min-width: 768px) {
-      .writing-thumb-list .writing-thumb {
-        margin: 5.1em auto; } }
-    @media (min-width: 1024px) {
-      .writing-thumb-list .writing-thumb {
-        margin: 6em auto; } }
-    @media (min-width: 1400px) {
-      .writing-thumb-list .writing-thumb {
-        margin: 6.9em auto; } }
+    max-width: 100%;
+    margin-bottom: 2em; }
     .writing-thumb-list .writing-thumb a {
       color: #333333; }
 
-.writing-view a {
-  color: #333333; }
-.writing-view .text {
-  margin-bottom: 1.8em;
-  white-space: pre-line; }
-.writing-view .cdate {
-  margin-bottom: 1em;
-  font-size: 0.8em; }
-.writing-view .uname {
-  margin-bottom: 2em;
-  font-size: 1.4em; }
+.writing-view {
+  padding: 0em 2rem; }
+  .writing-view a {
+    color: #333333; }
+  .writing-view .text {
+    margin-bottom: 1.8em;
+    white-space: pre-line;
+    text-align: left;
+    line-height: 180%; }
+  .writing-view .cdate {
+    margin-bottom: 1em;
+    font-size: 0.8em; }
+  .writing-view .uname {
+    margin-bottom: 2em;
+    font-size: 1.4em; }
 
 #profile-text {
   white-space: pre-line; }

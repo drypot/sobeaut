@@ -1,12 +1,12 @@
 extends ../layout/layout
 
 block head-title
-  title New Writing - #{appName}
+  title New - #{appName}
 
 block content
 
   .section.page-title
-    h1 New Writing
+    h1 New
 
   if !ticketCount
     .section
@@ -21,13 +21,13 @@ block content
       });
 
     .section
-      form.main
+      form.main.text
         .sub-section
           .form-group
-            label.control-label Title
-            input.form-control(name='title', type='text', maxlength=128)  
+            //-label.control-label Title
+            input.form-control(name='title', type='text', maxlength=128, placeholder='Title')  
           .form-group
-            label.control-label Content
-            textarea.form-control(name='text', rows=21)
+            //-label.control-label Content
+            textarea.form-control(name='text', rows=21, placeholder='Content')
         .sub-section
           button.btn.btn-primary(name='send', data-loading-text='Sending') Send

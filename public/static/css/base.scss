@@ -125,10 +125,23 @@ form.main {
   max-width: $form-width;
   margin: 0 auto;
   padding: 0em 1em;
+  .control-label {
+    font-size: 1em; // override bootstrap
+  }
+  .form-control {
+    font-size: 1em; // override bootstrap
+  }
   input[type=file] {
     width: 100%;
   }
   textarea {
+  }
+}
+
+form.text {
+  max-width: $width;
+  textarea {
+    line-height: 180%;
   }
 }
 
@@ -212,9 +225,9 @@ pre.sample {
 .writing-thumb-list {
   max-width: 100%; // section 의 max-width 오버라이딩.
   .writing-thumb {
-    @include section;
     @include ac-link;
     max-width: 100%; // for ie
+    margin-bottom: 2em;
     .title {
       //margin-bottom: 0.6em;
     }
@@ -227,12 +240,12 @@ pre.sample {
 
 .writing-view {
   @include ac-link;
-  .title {
-
-  }
+  padding: 0em 2rem;
   .text {
     margin-bottom: 1.8em;
     white-space: pre-line;
+    text-align: left;
+    line-height: 180%;
   }
   .cdate {
     margin-bottom: 1em;

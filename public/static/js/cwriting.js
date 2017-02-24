@@ -41,13 +41,6 @@ $(function () {
 
   cwriting.initList = function () {
     sessionStorage.setItem('last-list-url', location);
-    $('.writing-thumb .comment').each(function () {
-      var $this = $(this);
-      $this.html(tagUpText($this.html()));
-    });
-    if (fs) {
-      addFsHandler($('.writing-thumb .writing'));
-    }
   };
 
   cwriting.initNew = function () {
@@ -64,26 +57,15 @@ $(function () {
     var $form = formty.getForm('form.main');
     $form.$send.click(function (err, res) {
       formty.put('/api/writings/' + writing._id, $form, function () {
-        location = sessionStorage.getItem('last-list-url') || '/';
-        //history.go(-2);
-        //location = '/';
-        //location = '/writings/' + writing._id;
+        location = '/writings/' + writing._id;
       });
       return false;
     });
   };
 
   cwriting.initView = function (writing) {
-    $('.writing-full img').click(function () {
-      history.back();
-      return false;
-    });
-    if (fs) {
-      addFsHandler($('.writing-full .writing'));
-    }
-
-    var $comment = $('.writing-info .comment');
-    $comment.html(tagUpText($comment.html()));
+    var $text = $('.writing-view .text');
+    $text.html(tagUpText($text.html()));
 
     $('#update-btn').click(function () {
       location = '/writings/' + writing._id + '/update';
