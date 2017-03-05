@@ -127,9 +127,14 @@ pre.sample {
   max-width: 100%; }
   .writing-thumb-list .writing-thumb {
     max-width: 100%;
-    margin-bottom: 2em; }
+    margin-bottom: 3.5em; }
     .writing-thumb-list .writing-thumb a {
       color: #333333; }
+    .writing-thumb-list .writing-thumb .title {
+      font-size: 1.2em;
+      margin-bottom: 0.3em; }
+    .writing-thumb-list .writing-thumb .uname {
+      font-size: 1em; }
 
 .writing-text {
   padding: 0em 2rem; }

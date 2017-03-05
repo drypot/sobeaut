@@ -224,11 +224,13 @@ pre.sample {
   .writing-thumb {
     @include ac-link;
     max-width: 100%; // for ie
-    margin-bottom: 2em;
+    margin-bottom: 3.5em;
     .title {
-      //margin-bottom: 0.6em;
+      font-size: 1.2em;
+      margin-bottom: 0.3em;
     }
     .uname {
+      font-size: 1em;
     }
   }
 }
