@@ -187,12 +187,6 @@ pre.sample {
   }
 }
 
-.writing-title {
-  h1 {
-    font-size: 1.9em;
-  }
-}
-
 .top-links {
   a {
     padding-left:8px;
@@ -243,6 +237,14 @@ pre.sample {
 
 // writing view
 
+.writing-title {
+  h1 {
+    font-size: 1.9em;
+    white-space: pre-line;
+    line-height: 180%;
+  }
+}
+
 .writing-text {
   @include ac-link;
   padding: 0em 2rem;
@@ -250,12 +252,6 @@ pre.sample {
     margin-bottom: 1.8em;
     white-space: pre-line;
     line-height: 180%;
-  }
-  .left {
-    text-align: left;
-  }
-  .center {
-    text-align: center;
   }
 }
 

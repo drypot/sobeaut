@@ -17,7 +17,7 @@ block content
     form.main.text
       .sub-section
         .form-group
-          input.form-control.input-lg(name='title', type='text', maxlength=128, placeholder='Title', value=writing.title)  
+          textarea.form-control.input-lg(name='title', rows=3, placeholder='Title', maxlength=128) #{writing.title}
         .form-group
           textarea.form-control.input-lg(name='text', rows=21, placeholder='Content') #{writing.text}
         .form-group

@@ -104,9 +104,6 @@ pre.sample {
 .page-title h1 {
   font-size: 2.5em; }
 
-.writing-title h1 {
-  font-size: 1.9em; }
-
 .top-links a {
   padding-left: 8px;
   padding-right: 8px; }
@@ -139,6 +136,11 @@ pre.sample {
     .writing-thumb-list .writing-thumb .uname {
       font-size: 1em; }
 
+.writing-title h1 {
+  font-size: 1.9em;
+  white-space: pre-line;
+  line-height: 180%; }
+
 .writing-text {
   padding: 0em 2rem; }
   .writing-text a {
@@ -147,10 +149,6 @@ pre.sample {
     margin-bottom: 1.8em;
     white-space: pre-line;
     line-height: 180%; }
-  .writing-text .left {
-    text-align: left; }
-  .writing-text .center {
-    text-align: center; }
 
 .writing-info a {
   color: #333333; }
