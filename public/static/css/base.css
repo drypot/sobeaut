@@ -132,7 +132,9 @@ pre.sample {
       color: #333333; }
     .writing-thumb-list .writing-thumb .title {
       font-size: 1.2em;
-      margin-bottom: 0.3em; }
+      margin-bottom: 0.3em;
+      white-space: pre-line;
+      line-height: 180%; }
     .writing-thumb-list .writing-thumb .uname {
       font-size: 1em; }
 
